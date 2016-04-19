@@ -222,6 +222,7 @@
             this.buttonRelatorios.TabIndex = 19;
             this.buttonRelatorios.Text = "Relatórios";
             this.buttonRelatorios.UseVisualStyleBackColor = true;
+            this.buttonRelatorios.Click += new System.EventHandler(this.buttonRelatorios_Click);
             // 
             // Form1
             // 

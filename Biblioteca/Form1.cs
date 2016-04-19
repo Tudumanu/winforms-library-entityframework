@@ -184,5 +184,13 @@ namespace Biblioteca
             FormAutor formAutor = new FormAutor();
             formAutor.ShowDialog();
         }
+
+        private void buttonRelatorios_Click(object sender, EventArgs e)
+        {
+            buttonLimpar_Click(sender, e);
+
+            FormRelatorio form = new FormRelatorio();
+            form.ShowDialog();
+        }
     }
 }
