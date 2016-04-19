@@ -22,6 +22,7 @@ namespace Biblioteca
 
             textId.Enabled = false; //nunca edita Id
             buttonRelatorios.Enabled = true; //sempre pode acessar relatórios
+            listAutores.Enabled = false; //não há necessidade de selecionar autor
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -64,7 +65,7 @@ namespace Biblioteca
             textEditora.Clear();
             textAno.Clear();
             textNumeroChamada.Clear();
-            //TODO: listAutores clear;
+            listAutores.DataSource = null;
         }
 
         private void exibirSelecionado(int id)
@@ -84,6 +85,9 @@ namespace Biblioteca
                     textNumeroChamada.Text = livro.NumeroChamada;
 
                     //TODO: list autores, carregar
+                    listAutores.DataSource = livro.Autor.ToList();
+                    listAutores.DisplayMember = "Nome";
+                    listAutores.ValueMember = "Id";
 
                 } catch (System.Exception)
                 {
@@ -175,6 +179,8 @@ namespace Biblioteca
 
         private void buttonGerenciarAutores_Click(object sender, EventArgs e)
         {
+            buttonLimpar_Click(sender, e);
+
             FormAutor formAutor = new FormAutor();
             formAutor.ShowDialog();
         }

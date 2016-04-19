@@ -81,6 +81,10 @@ namespace Biblioteca
                     textId.Text = autor.Id.ToString();
                     textNome.Text = autor.Nome;
 
+                    List<Livro> list = new List<Livro>();
+                    list.Add(autor.Livro);
+
+                    comboLivro.DataSource = list;
                 }
                 catch (System.Exception)
                 {
@@ -100,12 +104,81 @@ namespace Biblioteca
         {
             habilitarBotoesAcao(false);
             limparCampos();
+            listarLivros();
         }
 
         private void buttonLimpar_Click(object sender, EventArgs e)
         {
             limparCampos();
             habilitarBotoesAcao(true);
+        }
+
+        private void buttonSalvar_Click(object sender, EventArgs e)
+        {
+            if (textNome.Text.Equals(String.Empty))
+            {
+                MessageBox.Show("Digite ao menos um nome para o autor");
+                return;
+            }
+
+            // Novo Autor
+            if (textId.Text.Equals(String.Empty))
+            {
+                using (var contexto = new ControleBibliotecaContainer())
+                {
+                    var autor = new Autor();
+                    autor.Nome = textNome.Text;
+
+                    Livro livro = (Livro) comboLivro.SelectedValue;
+                    autor.LivroId = livro.Id;
+
+                    contexto.AutorSet.Add(autor);
+                    contexto.SaveChanges();
+
+                    textId.Text = autor.Id.ToString();
+                }
+            }
+            else
+            {
+                //Editando Autor
+                using (var contexto = new ControleBibliotecaContainer())
+                {
+                    int id;
+                    String idStr = textId.Text;
+                    if (int.TryParse(idStr, out id))
+                    {
+                        var autor = (from a in contexto.AutorSet
+                                     where a.Id == id
+                                     select a).First();
+
+                        autor.Nome = textNome.Text;
+
+                        Livro livro = (Livro) comboLivro.SelectedValue;
+                        autor.LivroId = livro.Id;
+
+                        contexto.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ocorreu um erro ao converter o id " + idStr + " para inteiro");
+                    }
+                }
+            }
+
+            listarAutores();
+            habilitarBotoesAcao(true);
+        }
+
+        private void buttonEditar_Click(object sender, EventArgs e)
+        {
+            int id;
+            if (int.TryParse(listAutores.SelectedValue.ToString(), out id))
+            {
+                exibirSelecionado(id);
+                habilitarBotoesAcao(false);
+            }
+            else
+                MessageBox.Show("Selecione um autor da lista");
         }
     }
 }
