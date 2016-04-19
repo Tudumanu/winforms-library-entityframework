@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Biblioteca
 {
-    public partial class Relatorio : Form
+    public partial class FormRelatorio : Form
     {
-        public Relatorio()
+        public FormRelatorio()
         {
             InitializeComponent();
         }

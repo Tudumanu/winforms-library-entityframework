@@ -1,6 +1,6 @@
 ﻿namespace Biblioteca
 {
-    partial class Autor
+    partial class FormAutor
     {
         /// <summary>
         /// Required designer variable.
@@ -84,6 +84,7 @@
             this.buttonLimpar.TabIndex = 7;
             this.buttonLimpar.Text = "Limpar";
             this.buttonLimpar.UseVisualStyleBackColor = true;
+            this.buttonLimpar.Click += new System.EventHandler(this.buttonLimpar_Click);
             // 
             // buttonSalvar
             // 
@@ -111,6 +112,7 @@
             this.buttonNovo.TabIndex = 4;
             this.buttonNovo.Text = "Novo";
             this.buttonNovo.UseVisualStyleBackColor = true;
+            this.buttonNovo.Click += new System.EventHandler(this.buttonNovo_Click);
             // 
             // label3
             // 
@@ -153,8 +155,9 @@
             this.buttonFechar.TabIndex = 12;
             this.buttonFechar.Text = "Fechar";
             this.buttonFechar.UseVisualStyleBackColor = true;
+            this.buttonFechar.Click += new System.EventHandler(this.buttonFechar_Click);
             // 
-            // Autor
+            // FormAutor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -172,7 +175,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboLivro);
             this.Controls.Add(this.label1);
-            this.Name = "Autor";
+            this.Name = "FormAutor";
             this.Text = "Autor";
             this.ResumeLayout(false);
             this.PerformLayout();

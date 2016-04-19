@@ -178,6 +178,7 @@
             this.buttonGerenciarAutores.TabIndex = 14;
             this.buttonGerenciarAutores.Text = "Gerenciar Autores";
             this.buttonGerenciarAutores.UseVisualStyleBackColor = true;
+            this.buttonGerenciarAutores.Click += new System.EventHandler(this.buttonGerenciarAutores_Click);
             // 
             // label6
             // 

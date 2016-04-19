@@ -108,6 +108,12 @@ namespace Biblioteca
 
         private void buttonSalvar_Click(object sender, EventArgs e)
         {
+            if (textTitulo.Text.Equals(String.Empty)) {
+                MessageBox.Show("Digite ao menos um título para o livro");
+                return;
+            }
+                
+
             // Novo Livro
             if (textId.Text.Equals(String.Empty))
             {
@@ -165,6 +171,12 @@ namespace Biblioteca
             }
             else
                 MessageBox.Show("Selecione um livro da lista");
+        }
+
+        private void buttonGerenciarAutores_Click(object sender, EventArgs e)
+        {
+            FormAutor formAutor = new FormAutor();
+            formAutor.ShowDialog();
         }
     }
 }

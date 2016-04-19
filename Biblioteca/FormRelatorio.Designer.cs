@@ -1,6 +1,6 @@
 ﻿namespace Biblioteca
 {
-    partial class Relatorio
+    partial class FormRelatorio
     {
         /// <summary>
         /// Required designer variable.
