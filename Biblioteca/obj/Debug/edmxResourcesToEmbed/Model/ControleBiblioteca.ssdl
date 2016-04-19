@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ControleBiblioteca.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ControleBibliotecaStoreContainer">
+    <EntitySet Name="LivroSet" EntityType="ControleBiblioteca.Store.LivroSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AutorSet" EntityType="ControleBiblioteca.Store.AutorSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="LivroAutor" Association="ControleBiblioteca.Store.LivroAutor">
+      <End Role="Livro" EntitySet="LivroSet" />
+      <End Role="Autor" EntitySet="AutorSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="LivroSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Titulo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Editora" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ano" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NumeroChamada" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AutorSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LivroId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="LivroAutor">
+    <End Role="Livro" Type="ControleBiblioteca.Store.LivroSet" Multiplicity="1" />
+    <End Role="Autor" Type="ControleBiblioteca.Store.AutorSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Livro">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Autor">
+        <PropertyRef Name="LivroId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

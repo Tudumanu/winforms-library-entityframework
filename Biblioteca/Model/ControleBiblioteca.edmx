@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ControleBiblioteca.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ControleBibliotecaStoreContainer">
+    <EntitySet Name="LivroSet" EntityType="ControleBiblioteca.Store.LivroSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AutorSet" EntityType="ControleBiblioteca.Store.AutorSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="LivroAutor" Association="ControleBiblioteca.Store.LivroAutor">
+      <End Role="Livro" EntitySet="LivroSet" />
+      <End Role="Autor" EntitySet="AutorSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="LivroSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Titulo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Editora" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ano" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NumeroChamada" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AutorSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LivroId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="LivroAutor">
+    <End Role="Livro" Type="ControleBiblioteca.Store.LivroSet" Multiplicity="1" />
+    <End Role="Autor" Type="ControleBiblioteca.Store.AutorSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Livro">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Autor">
+        <PropertyRef Name="LivroId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ControleBiblioteca" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ControleBibliotecaContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LivroSet" EntityType="ControleBiblioteca.Livro" />
+          <EntitySet Name="AutorSet" EntityType="ControleBiblioteca.Autor" />
+          <AssociationSet Name="LivroAutor" Association="ControleBiblioteca.LivroAutor">
+            <End Role="Livro" EntitySet="LivroSet" />
+            <End Role="Autor" EntitySet="AutorSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Livro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" Nullable="false" />
+          <Property Name="Editora" Type="String" Nullable="false" />
+          <Property Name="Ano" Type="String" Nullable="false" />
+          <Property Name="NumeroChamada" Type="String" Nullable="false" />
+          <NavigationProperty Name="Autor" Relationship="ControleBiblioteca.LivroAutor" FromRole="Livro" ToRole="Autor" />
+        </EntityType>
+        <EntityType Name="Autor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" />
+          <NavigationProperty Name="Livro" Relationship="ControleBiblioteca.LivroAutor" FromRole="Autor" ToRole="Livro" />
+          <Property Name="LivroId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="LivroAutor">
+          <End Type="ControleBiblioteca.Livro" Role="Livro" Multiplicity="1" />
+          <End Type="ControleBiblioteca.Autor" Role="Autor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Livro">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Autor">
+              <PropertyRef Name="LivroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ControleBibliotecaStoreContainer" CdmEntityContainer="ControleBibliotecaContainer">
+    <EntitySetMapping Name="LivroSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ControleBiblioteca.Livro)">
+        <MappingFragment StoreEntitySet="LivroSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Editora" ColumnName="Editora" />
+          <ScalarProperty Name="Ano" ColumnName="Ano" />
+          <ScalarProperty Name="NumeroChamada" ColumnName="NumeroChamada" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AutorSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ControleBiblioteca.Autor)">
+        <MappingFragment StoreEntitySet="AutorSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="LivroId" ColumnName="LivroId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
