@@ -99,5 +99,72 @@ namespace Biblioteca
             habilitarBotoesAcao(false);
             limparCampos();
         }
+
+        private void buttonLimpar_Click(object sender, EventArgs e)
+        {
+            limparCampos();
+            habilitarBotoesAcao(true);
+        }
+
+        private void buttonSalvar_Click(object sender, EventArgs e)
+        {
+            // Novo Livro
+            if (textId.Text.Equals(String.Empty))
+            {
+                using (var contexto = new ControleBibliotecaContainer()) {
+                    var livro = new Livro();
+                    livro.Titulo = textTitulo.Text;
+                    livro.Editora = textEditora.Text;
+                    livro.Ano = textAno.Text;
+                    livro.NumeroChamada = textNumeroChamada.Text;
+
+                    contexto.LivroSet.Add(livro);
+                    contexto.SaveChanges();
+
+                    textId.Text = livro.Id.ToString();
+                }
+
+            } else
+            {
+                //Editando Livro
+                using (var contexto = new ControleBibliotecaContainer()) {
+                    int id;
+                    String idStr = textId.Text;
+                    if (int.TryParse(idStr, out id))
+                    {
+                        var livro = (from l in contexto.LivroSet
+                                     where l.Id == id
+                                     select l).First();
+
+                        livro.Titulo = textTitulo.Text;
+                        livro.Editora = textEditora.Text;
+                        livro.Ano = textAno.Text;
+                        livro.NumeroChamada = textNumeroChamada.Text;
+
+                        contexto.SaveChanges();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ocorreu um erro ao converter o id "+ idStr + " para inteiro");
+                    }
+                }
+            }
+
+            listarLivros();
+            habilitarBotoesAcao(true);
+        }
+
+        private void buttonEditar_Click(object sender, EventArgs e)
+        {
+            int id;
+            if (int.TryParse(listLivros.SelectedValue.ToString(), out id))
+            {
+                exibirSelecionado(id);
+                habilitarBotoesAcao(false);
+            }
+            else
+                MessageBox.Show("Selecione um livro da lista");
+        }
     }
 }
