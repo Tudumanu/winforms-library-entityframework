@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Biblioteca.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -14,7 +15,10 @@ namespace ServiceBuscaBiblioteca
     {
 
         [OperationContract]
-        string GetData(int value);
+        List<Livro> GetLivroCodigo(int id);
+
+        [OperationContract]
+        List<Livro> GetLivroTitulo(String titulo);
 
     }
 

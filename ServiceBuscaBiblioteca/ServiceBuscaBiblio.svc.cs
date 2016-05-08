@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Biblioteca.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,9 +13,27 @@ namespace ServiceBuscaBiblioteca
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class ServiceBuscaBiblio : IServiceBuscaBiblio
     {
-        public string GetData(int value)
+        public List<Livro> GetLivroCodigo(int id)
         {
-            return string.Format("You entered: {0}", value);
+            using (var contexto = new ControleBibliotecaContainer())
+            {
+                var lista = (from l in contexto.LivroSet
+                             where l.Id == id
+                             orderby l.Titulo
+                             select l).ToList();
+
+                return lista;
+            }
+        }
+
+        public List<Livro> GetLivroTitulo(String titulo)
+        {
+            using (var contexto = new ControleBibliotecaContainer())
+            {
+                var lista = contexto.LivroSet.Where(l => l.Titulo.Contains(titulo)).ToList();
+
+                return lista;
+            }
         }
 
     }
