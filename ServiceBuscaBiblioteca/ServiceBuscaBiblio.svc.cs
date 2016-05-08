@@ -13,7 +13,7 @@ namespace ServiceBuscaBiblioteca
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class ServiceBuscaBiblio : IServiceBuscaBiblio
     {
-        public List<Livro> GetLivroCodigo(int id)
+        public Livro GetLivroCodigo(int id)
         {
             using (var contexto = new ControleBibliotecaContainer())
             {
@@ -22,7 +22,10 @@ namespace ServiceBuscaBiblioteca
                              orderby l.Titulo
                              select l).ToList();
 
-                return lista;
+                if (lista.Capacity > 0)
+                    return lista.First();
+                else
+                    return null;
             }
         }
 

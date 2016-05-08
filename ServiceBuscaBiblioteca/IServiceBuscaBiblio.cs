@@ -15,7 +15,7 @@ namespace ServiceBuscaBiblioteca
     {
 
         [OperationContract]
-        List<Livro> GetLivroCodigo(int id);
+        Livro GetLivroCodigo(int id);
 
         [OperationContract]
         List<Livro> GetLivroTitulo(String titulo);
