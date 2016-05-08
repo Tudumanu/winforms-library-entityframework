@@ -24,8 +24,13 @@ namespace BuscaWeb
                 int i = int.Parse(txtCodigo.Text);
 
                 Livro l = service.GetLivroCodigo(i);
-                if (l != null)
-                    labelMensagemCodigo.Text = "Foi encontrado o livro com título: "+ l.Titulo;
+                if (l != null) {
+                    var autores = "";
+                    foreach (Autor autor in l.Autor)
+                        autores += autor.Nome + ", ";
+
+                    labelMensagemCodigo.Text = "Foi encontrado o livro com Título: " + l.Titulo + " Ano: " + l.Ano + " Editora: " + l.Editora + " Número de Chamada: " + l.NumeroChamada + " Autores: " + autores;
+                }
                 else
                     labelMensagemCodigo.Text = "Não foi encontrado o livro!";
             } catch (FormatException ex)

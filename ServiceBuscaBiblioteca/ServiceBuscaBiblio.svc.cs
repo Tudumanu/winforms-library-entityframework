@@ -17,15 +17,11 @@ namespace ServiceBuscaBiblioteca
         {
             using (var contexto = new ControleBibliotecaContainer())
             {
-                var lista = (from l in contexto.LivroSet
-                             where l.Id == id
-                             orderby l.Titulo
-                             select l).ToList();
+                var livro = contexto.LivroSet.Include("Autor")
+                    .Where(l => l.Id == id)
+                    .FirstOrDefault();
 
-                if (lista.Capacity > 0)
-                    return lista.First();
-                else
-                    return null;
+                return livro;
             }
         }
 
@@ -33,7 +29,8 @@ namespace ServiceBuscaBiblioteca
         {
             using (var contexto = new ControleBibliotecaContainer())
             {
-                var lista = contexto.LivroSet.Where(l => l.Titulo.Contains(titulo)).ToList();
+                var lista = contexto.LivroSet.Include("Autor")
+                    .Where(l => l.Titulo.Contains(titulo)).ToList();
 
                 return lista;
             }

@@ -15,6 +15,7 @@
         <asp:Label runat="server" Text="Código: "></asp:Label>
         <asp:TextBox runat="server" id="txtCodigo"></asp:TextBox>
         <asp:Button runat="server" Text="Buscar" OnClick="btnCodigo_Click" />
+        <br />
         <asp:Label runat="server" id="labelMensagemCodigo"></asp:Label>
     </fieldset>
     </div>
