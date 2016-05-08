@@ -49,4 +49,6 @@ Temporary Items
 packages
 Biblioteca/bin/*
 Biblioteca/obj/*
+ServiceBuscaBiblioteca/bin/*
+ServiceBuscaBiblioteca/obj/*
 
