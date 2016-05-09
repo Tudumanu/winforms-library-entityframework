@@ -29,8 +29,10 @@ namespace ServiceBuscaBiblioteca
         {
             using (var contexto = new ControleBibliotecaContainer())
             {
-                var lista = contexto.LivroSet.Include("Autor")
-                    .Where(l => l.Titulo.Contains(titulo)).ToList();
+                var lista = contexto.LivroSet
+                    .Where(l => l.Titulo.Contains(titulo))
+                    .OrderBy(l => l.Titulo)
+                    .ToList();
 
                 return lista;
             }

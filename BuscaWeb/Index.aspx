@@ -29,7 +29,9 @@
         <asp:Label runat="server" Text="Título: "></asp:Label>
         <asp:TextBox runat="server" id="txtTitulo"></asp:TextBox>
         <asp:Button runat="server" Text="Buscar" OnClick="btnTitulo_Click" />
+        <br />
         <asp:Label runat="server" id="labelMensagemTitulo"></asp:Label>
+        <asp:GridView runat="server" id="gridLivros"></asp:GridView>
     </fieldset>
     </div>
     </form>

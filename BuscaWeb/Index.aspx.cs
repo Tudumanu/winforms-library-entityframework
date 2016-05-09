@@ -2,6 +2,7 @@
 using ServiceBuscaBiblioteca;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -41,7 +42,22 @@ namespace BuscaWeb
 
         protected void btnTitulo_Click(object sender, EventArgs e)
         {
+            var lista = service.GetLivroTitulo(txtTitulo.Text);
 
+            var size = lista.Count;
+
+            if (size > 0)
+            {
+                gridLivros.DataSource = lista;
+                gridLivros.DataBind();
+                labelMensagemTitulo.Text = "Achou " + size + " Livros!";
+            }
+            else
+            {
+                gridLivros.DataSource = null;
+                gridLivros.DataBind();
+                labelMensagemTitulo.Text = "Não foi encontrado livro com título: " + txtTitulo.Text;
+            }
         }
     }
 }
